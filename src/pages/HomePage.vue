@@ -1,6 +1,6 @@
 <template>
   <h1>Brasileirasso Oficial</h1>
-  <CardTime v-for="time in times" v-bind:key="time.id" :time="time" />
+  <CardTime v-for="time in times" v-bind:key="time.id" :time="time" :jogadores="time.jogadores" />
 </template>
 
 <script>
@@ -19,8 +19,21 @@ export default {
       .getAllTimes()
       .then((dados) => {
         this.times = dados
-      })
-      .catch((erro) => {
+
+        this.times.forEach((time) => {
+          services
+            .buscarJogadoresDeUmTime(time.id)
+            .then((jogadores) => {
+              time.jogadores = jogadores
+            }).catch((erro) => {
+              console.log(erro)
+            })
+        })
+
+        console.log(this.times);
+
+
+      }).catch((erro) => {
         console.log(erro)
       })
   },
