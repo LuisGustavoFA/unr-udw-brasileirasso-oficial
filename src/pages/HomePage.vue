@@ -25,15 +25,13 @@ export default {
             .buscarJogadoresDeUmTime(time.id)
             .then((jogadores) => {
               time.jogadores = jogadores
-            }).catch((erro) => {
+            })
+            .catch((erro) => {
               console.log(erro)
             })
         })
-
-        console.log(this.times);
-
-
-      }).catch((erro) => {
+      })
+      .catch((erro) => {
         console.log(erro)
       })
   },

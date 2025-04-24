@@ -25,14 +25,28 @@ export default {
   buscarJogadoresDeUmTime(id) {
     return new Promise((resolve, reject) => {
       jarvis
-      .get(`/times/${id}/jogadores`)
-      .then((response) => {
-        resolve(response.data)
-      })
-      .catch((erro) => {
-        console.log(erro.message)
+        .get(`/times/${id}/jogadores`)
+        .then((response) => {
+          resolve(response.data)
+        })
+        .catch((erro) => {
+          console.log(erro.message)
           reject(erro.message)
-      })
+        })
     })
-  }
+  },
+
+  saveTime(time) {
+    return new Promise((resolve, reject) => {
+      jarvis
+        .post('/times', time)
+        .then((response) => {
+          resolve(response.data)
+        })
+        .catch((erro) => {
+          console.log(erro.message)
+          reject(erro.message)
+        })
+    })
+  },
 }
